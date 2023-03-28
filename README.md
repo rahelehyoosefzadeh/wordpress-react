@@ -41,3 +41,6 @@ or use the git instructions to install.
 
 ## Screenshots ##
 
+My lovely users table lokks like this:
+![my-lovely-users-table](https://example.com/kitten.jpg "My lovely users table")
+
