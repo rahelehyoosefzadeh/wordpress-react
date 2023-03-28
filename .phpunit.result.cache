@@ -1,0 +1,1 @@
+{"version":1,"defects":{"MyPlugin\\InpsydePluginTest::test_enqueue_scripts":8,"InpsydePluginTest::test_add_hooks":8},"times":{"MyPlugin\\InpsydePluginTest::test_enqueue_scripts":0.205,"InpsydePluginTest::test_add_hooks":0.111}}

@@ -1,0 +1,25 @@
+{
+    "name": "raheleh/inpsyde",
+    "description": "Wordpress Plugin to display a lovely table",
+    "autoload": {
+        "psr-4": {
+            "Raheleh\\Inpsyde\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Raheleh",
+            "email": "r.yoosefzadeh@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "brain/monkey": "2.*",
+        "phpunit/phpunit": "^10.0",
+        "inpsyde/php-coding-standards": "^1.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}
