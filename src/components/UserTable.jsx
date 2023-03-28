@@ -14,11 +14,11 @@ const UserTable = (props) => {
         <div className='usertable'>
                 {selectedUser && (
                 <div className="card well-lg p-2 mb-1">
-                    <div className="panel panel-primary">
-                        <div className="panel-heading">
-                            <h3>{selectedUser.name} Details</h3>
+                    <div className="card ">
+                        <div className="card-header bg-primary text-white">
+                            <h3>Name: {selectedUser.name}</h3>
                         </div>
-                        <div className="panel-body">
+                        <div className="card-body">
                             <div className="row">
                             <div className="col-sm-4">
                                 <div><strong>Username: </strong>{selectedUser.username}</div>
