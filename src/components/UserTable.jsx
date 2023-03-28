@@ -11,7 +11,7 @@ const UserTable = (props) => {
     };
 
     return (
-        <div className='usertable'>
+        <div>
                 {selectedUser && (
                 <div className="card well-lg p-2 mb-1">
                     <div className="card ">
@@ -44,7 +44,7 @@ const UserTable = (props) => {
                 )}
             <div className="card p-2">
                 <h3>Users Table</h3>
-                <table className="table table-striped table-hover p-">
+                <table className="table table-striped table-hover p-2">
                     <thead>
                         <tr>
                             <th>ID</th>

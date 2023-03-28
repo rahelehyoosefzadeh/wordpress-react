@@ -1,7 +1,5 @@
 <?php
 
-namespace MyTask;
-
 /**
  * Plugin Name: Inpsyde Plugin
  * Plugin URI:  https://github.com/rahelehyoosefzadeh/inpsyde/
@@ -14,10 +12,12 @@ namespace MyTask;
  * License URI: ./license.txt
  */
 
+declare(strict_types=1);
+
+namespace MyTask;
+
 require_once 'includes/Inpsyde.php';
 
-// Instantiate the plugin class
-add_action('plugins_loaded', function () {
-    $plugin = new Inpsyde();
-    $plugin->init();
-});
+// Instantiate the plugin class and initialize the plugin to work
+$plugin = new Inpsyde();
+$plugin->init();

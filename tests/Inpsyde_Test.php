@@ -38,10 +38,10 @@ class Inpsyde_Test extends TestCase
         Monkey\tearDown();
     }
     /**
-     * Summary of test_register_endpoint
+     * Summary of test_registerEndpoint
      * @return void
      */
-    public function test_register_endpoint()
+    public function test_registerEndpoint()
     {
         define('EP_ROOT', '/');
 
@@ -59,7 +59,7 @@ class Inpsyde_Test extends TestCase
 
         $plugin = new Inpsyde();
 
-        $plugin->register_endpoint();
+        $plugin->registerEndpoint();
 
         Monkey\tearDown();
     }
@@ -73,13 +73,13 @@ class Inpsyde_Test extends TestCase
         $plugin = new Inpsyde();
         Monkey\setUp();
 
-        Functions\expect('add_action')->once()->with('init', [$plugin, 'register_endpoint']);
-        Functions\expect('add_action')->once()->with('wp_enqueue_scripts', [$plugin, 'enqueue_scripts']);
-        Functions\expect('add_action')->once()->with('rest_api_init', [$plugin, 'register_ajax_route']);
-        Functions\expect('add_filter')->once()->with('query_vars', [$plugin, 'add_query_vars']);
-        Functions\expect('add_action')->once()->with('template_include', [$plugin, 'display_react_component']);
+        Functions\expect('add_action')->once()->with('init', [$plugin, 'registerEndpoint']);
+        Functions\expect('add_action')->once()->with('wp_enqueue_scripts', [$plugin, 'enqueueScripts']);
+        Functions\expect('add_action')->once()->with('rest_api_init', [$plugin, 'registerAjaxRoute']);
+        Functions\expect('add_filter')->once()->with('query_vars', [$plugin, 'addQueryVars']);
+        Functions\expect('add_action')->once()->with('template_include', [$plugin, 'displayReactComponent']);
 
-        $plugin->add_hooks();
+        $plugin->addHooks();
         Monkey\tearDown();
     }
 
@@ -93,23 +93,23 @@ class Inpsyde_Test extends TestCase
         Monkey\setUp();
         Functions\expect('add_action')
             ->once()
-            ->with('init', [$plugin, 'register_endpoint']);
+            ->with('init', [$plugin, 'registerEndpoint']);
 
         Functions\expect('add_action')
             ->once()
-            ->with('wp_enqueue_scripts', [$plugin, 'enqueue_scripts']);
+            ->with('wp_enqueue_scripts', [$plugin, 'enqueueScripts']);
 
         Functions\expect('add_action')
             ->once()
-            ->with('rest_api_init', [$plugin, 'register_ajax_route']);
+            ->with('rest_api_init', [$plugin, 'registerAjaxRoute']);
 
         Functions\expect('add_action')
             ->once()
-            ->with('template_include', [$plugin, 'display_react_component']);
+            ->with('template_include', [$plugin, 'displayReactComponent']);
 
         Functions\expect('add_filter')
             ->once()
-            ->with('query_vars', [$plugin, 'add_query_vars']);
+            ->with('query_vars', [$plugin, 'addQueryVars']);
 
 
         $plugin->init();
@@ -130,11 +130,11 @@ class Inpsyde_Test extends TestCase
                 '/details',
                 array(
                     'methods' => 'GET',
-                    'callback' => array($plugin, 'get_details'),
+                    'callback' => array($plugin, 'fetchDetails'),
                 )
             );
 
-        $plugin->register_ajax_route();
+        $plugin->registerAjaxRoute();
         Monkey\tearDown();
     }
 }

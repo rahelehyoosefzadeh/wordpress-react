@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MyTask;
 
 /**
@@ -26,48 +28,48 @@ class Inpsyde
      * Method init is used to initialize and instantiate the Inpsyde Plugin Class
      * @return void
      */
-    static function init()
+    public function init()
     {
         $instance = new Inpsyde();
-        $instance->add_hooks();
+        $instance->addHooks();
     }
 
     /**
-     * Summary of add_hooks
+     * Summary of addHooks
      * hooks are used in this method inorder to make the working
      * @return void
      */
-    public function add_hooks()
+    public function addHooks()
     {
-        add_action('init', [$this, 'register_endpoint']);
-        add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
-        add_action('rest_api_init', [$this, 'register_ajax_route']);
-        add_action('template_include', [$this, 'display_react_component']);
-        add_filter('query_vars', [$this, 'add_query_vars']);
+        add_action('init', [$this, 'registerEndpoint']);
+        add_action('wp_enqueue_scripts', [$this, 'enqueueScripts']);
+        add_action('rest_api_init', [$this, 'registerAjaxRoute']);
+        add_action('template_include', [$this, 'displayReactComponent']);
+        add_filter('query_vars', [$this, 'addQueryVars']);
     }
 
     /**
-     * Summary of register_endpoint
+     * Summary of registerEndpoint
      * customEndpoint (given `my-lovely-users-table` )
      * is added at the / address of the website.and
      * flushes rewrite rules so that it is not required
      * to save permalinks in admin dashboard
      * @return void
      */
-    public function register_endpoint()
+    public function registerEndpoint()
     {
         add_rewrite_endpoint($this->customEndpoint, EP_ROOT);
         flush_rewrite_rules();
     }
 
     /**
-     * Summary of add_query_vars
+     * Summary of addQueryVars
      * possible query vars of the plugin are set
      * to the $vars array and then filtered in the query_vars hook
      * @param mixed $vars
      * @return array
      */
-    public function add_query_vars($vars): array
+    public function addQueryVars($vars): array
     {
         $vars[] = $this->customEndpoint;
         $vars[] = $this->detailsPath;
@@ -75,13 +77,14 @@ class Inpsyde
     }
 
     /**
-     * Summary of display_react_component
+     * Summary of displayReactComponent
      * here my custom template will be returned to be included in the plugin's endpoin
      * later the react component is loaded in the div "frontend" which is enclosed within
      * the main body of new template.
-     * @return void
+     * @param mixed $template
+     * @return mixed
      */
-    public function display_react_component($template)
+    public function displayReactComponent($template)
     {
         global $wp_query;
         if (isset($wp_query->query_vars[$this->customEndpoint])) {
@@ -91,20 +94,24 @@ class Inpsyde
     }
 
     /**
-     * Summary of enqueue_scripts
+     * Summary of enqueueScripts
      * neccessary scripts and style required for react component
      * and passing the users array to frontend are enqueued here
      * the siteUrl is also passed to the front end scripts so that
      * the later ajax queries are called correctly using this suteUrl in the ajax url
      * @return void
      */
-    public function enqueue_scripts(): void
+    public function enqueueScripts(): void
     {
-        wp_enqueue_style('app-style', plugin_dir_url(__FILE__) . './../build/index.css');
+        wp_enqueue_style(
+            'app-style',
+            plugin_dir_url(__FILE__) . './../build/index.css',
+            [],
+            '1.0.0'
+        );
         wp_enqueue_script(
             'app-script',
-            plugin_dir_url(__FILE__)
-                . './../build/index.js',
+            plugin_dir_url(__FILE__) . './../build/index.js',
             ['wp-element'],
             '1.0.0',
             true
@@ -113,17 +120,17 @@ class Inpsyde
         try {
             $dataArray = [
                 'siteUrl' => site_url(),
-                'users' => $this->get_data(),
+                'users' => $this->fetchData(),
             ];
             wp_localize_script('app-script', 'dataArray', $dataArray);
-        } catch (Exception $e) {
+        } catch (Exception $exp) {
             // handle error here
-            error_log($e->getMessage());
+            echo esc_html('Whoops, an error:' . $exp->getMessage());
         }
     }
 
     /**
-     * Summary of get_data
+     * Summary of fetchData
      * the users data from the 3rd party provided
      * in the Task description is remotely got from the
      * an I apply transient machanism baes on the WordPress documentaion in :
@@ -131,7 +138,7 @@ class Inpsyde
      * 'https://jsonplaceholder.typicode.com/users/' url
      * @return array
      */
-    public function get_data()
+    public function fetchData(): array
     {
         $cacheKey = 'inpsyde_plugin_data';
         $cachedData = get_transient($cacheKey);
@@ -149,43 +156,43 @@ class Inpsyde
             }
             return $data ?? [];
         } catch (Exception $exp) {
-            // I handle error here and log the error in websites log
-            error_log($exp->getMessage());
+            // I handle error here and just display it
+            echo esc_html('Whoops, an error:' . $exp->getMessage());
             return [];
         }
     }
 
     /**
-     * Summary of register_ajax_route
+     * Summary of registerAjaxRoute
      * here I register my custom endpoint inpsyde/v1/details
      * for calling user's details from the 3rd party
      * in the plugin's backend as required and
      * in the front end ajax requests are maded to this route.
-     * this method calls the get_details method and
+     * this method calls the fetchDetails method and
      * provide the selected user's details (given id)
      * @return void
      */
-    public function register_ajax_route(): void
+    public function registerAjaxRoute(): void
     {
         try {
             register_rest_route('inpsyde/v1', '/details', [
                 'methods' => 'GET',
-                'callback' => [$this, 'get_details'],
+                'callback' => [$this, 'fetchDetails'],
             ]);
         } catch (Exception $exp) {
-            // handle error here
-            error_log($exp->getMessage());
+            // I handle error here and just display it
+            echo esc_html('Whoops, an error:' . $exp->getMessage());
         }
     }
 
     /**
-     * Summary of get_details
+     * Summary of fetchDetails
      * here a remoe get call is made to the external url as the 3rd party
      * and provide the frontend's ajax request response
      * @param mixed $request
      * @return WP_Error|WP_REST_Response
      */
-    public function get_details($request)
+    public function fetchDetails($request): array
     {
         try {
             $userId = $request->get_param('id');
@@ -200,9 +207,9 @@ class Inpsyde
                 set_transient($cacheKey, $data, HOUR_IN_SECONDS); // cache for 1 hour
             }
             return rest_ensure_response($data ?? []);
-        } catch (Exception $e) {
-            // handle error here
-            error_log($exp->getMessage());
+        } catch (Exception $exp) {
+            // I handle error here and just display it
+            echo esc_html('Whoops, an error:' . $exp->getMessage());
             return rest_ensure_response([]);
         }
     }
