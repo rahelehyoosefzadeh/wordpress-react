@@ -28,11 +28,11 @@ Inorder to take the technical evaluation as an adventurous step of joining Inpsy
 
 
 ## Installation ##
-= Requirements =
+### Requirements ###
 * WordPress preferably latest version.
 * PHP 5.6 or later.
 
-= Installation =
+### Installation ###
 1. Unzip the downloaded package.
 2. Upload folder include the file to the `/wp-content/plugins/` directory.
 3. Activate the plugin through the `Plugins` menu in WordPress.
