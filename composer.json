@@ -1,6 +1,8 @@
 {
     "name": "raheleh/inpsyde",
-    "description": "Wordpress Plugin to display a lovely table",
+    "description": "A WordPress Plugin to display a lovely table of users",
+    "type": "wordpress-plugin",
+    "license": "GPL-3.0-or-later",
     "autoload": {
         "psr-4": {
             "Raheleh\\Inpsyde\\": "src/"
@@ -12,6 +14,7 @@
             "email": "r.yoosefzadeh@gmail.com"
         }
     ],
+    "minimum-stability": "stable",
     "require-dev": {
         "brain/monkey": "2.*",
         "phpunit/phpunit": "^10.0",
@@ -23,3 +26,4 @@
         }
     }
 }
+
