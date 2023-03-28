@@ -23,7 +23,7 @@ Both the all users' information and each user's details are fetched in the backe
 * React Component development applied as the frontend development choice :) My First practice in embeding a React Project in WordPress Plugin development
 
 
-= Developed by Raheleh Yoosefzadeh =
+## Developed by Raheleh Yoosefzadeh ##
 Inorder to take the technical evaluation as an adventurous step of joining Inpsyde's wonderful team.
 
 
