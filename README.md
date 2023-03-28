@@ -1,4 +1,4 @@
-# Inpsyde #
+# Inpsyde Plugin #
 This WordPress plugin display a lovely users table when visiting a custom endpoint '/my-lovely-users-table/'.
 The frontend is implemented in React and the back end is PHP 8.2 in compliance with WordPress and Inpsyde standards.
 
