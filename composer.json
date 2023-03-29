@@ -14,7 +14,7 @@
             "email": "r.yoosefzadeh@gmail.com"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require-dev": {
         "brain/monkey": "2.*",
         "phpunit/phpunit": "^10.0",
