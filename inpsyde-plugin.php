@@ -16,6 +16,8 @@ declare(strict_types=1);
 
 namespace MyTask;
 
+require 'vendor/autoload.php';
+
 require_once 'includes/Inpsyde.php';
 
 // Instantiate the plugin class and initialize the plugin to work
