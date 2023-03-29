@@ -190,9 +190,9 @@ class Inpsyde
      * here a remoe get call is made to the external url as the 3rd party
      * and provide the frontend's ajax request response
      * @param mixed $request
-     * @return WP_Error|WP_REST_Response
+     * @return mixed
      */
-    public function fetchDetails($request): array
+    public function fetchDetails($request)
     {
         try {
             $userId = $request->get_param('id');
