@@ -16,6 +16,15 @@ declare(strict_types=1);
 
 namespace MyTask;
 
+$php_version = version_compare( phpversion(), '5.3.0', '>=' );
+
+if ( ! $php_version ) {
+	echo 'My Inpsyde Plugin requires <strong>PHP 5.3 + </strong>.<br>';
+	echo 'Your Installation PHP is ' . phpversion();
+	exit;
+}
+
+
 require 'vendor/autoload.php';
 
 require_once 'includes/Inpsyde.php';
