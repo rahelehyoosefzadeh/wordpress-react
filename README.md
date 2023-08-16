@@ -16,14 +16,6 @@ https://example.com/my-lovely-users-table/
   ### Plugin's frontend ###
   https://example.com/my-lovely-users-table/
 
-# Installed example on a live address
-http://185.242.161.39//my-lovely-users-table/
-  ### Installed example on a live address ###
-  http://185.242.161.39//my-lovely-users-table/
-
-
-Both the all users' information and each user's details are fetched in the backend of the plugin through calling the API in the backend and cached for 1 hour iorder to improve the data fetching for next time (within 1 hour).
-
 # Caching HTTP Requests #
 
 WordPress Transients API applied for caching the HTTP requests in order to improve the performance and that a backend approach to be applied for caching.
